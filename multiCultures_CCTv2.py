@@ -25,6 +25,9 @@ from sklearn.metrics import mean_squared_error, r2_score
 
 def get_consensus(test_excel):
     # test_excel = test_excel.drop(test_excel.columns[[0]], axis=1)
+    print("Received data shape:", test_excel.shape)
+    print("Sample of first 3 rows:", test_excel.head(3))
+    
     stacked = test_excel.stack().reset_index()
     stacked.columns = ['Row', 'Column', 'Value']
     result = stacked.apply(lambda x: [x['Row'], test_excel.columns.get_loc(x['Column']), x['Value']], axis=1).tolist()
